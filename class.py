@@ -27,3 +27,57 @@ p2.name = "전우치"
 p1.print()
 p2.print()
 print()
+
+
+# 전역 변수가 겹치는 경우
+str_name = "전역 변수의 값이당"
+class DemoString:
+    def __init__(self):
+        self.str_name = ""
+    def set(self, msg):
+        self.str_name = msg
+    def print(self):
+        print(str_name)
+        # print(self.str_name)
+demostr = DemoString()
+demostr.set("message")
+demostr.print()
+print()
+# class 내 변수는 항상 self.을 붙여 이런 실수를 방지하자
+
+# 생성자 및 소멸자 매서드 -> 메모리 해제 등의 종료 작업을 위해 소멸자 메서드 사용가능
+# def __del__(self):
+# 참고로 __<object__로 시작하는 맴버 변수는 Naming Mangling이라고 외부에서 접근이 불가함
+
+class BankAccount:
+    def __init__(self, id, name, balance):
+        # self.id = id
+        # self.name = name
+        # self.balance = balance
+        self.__id = id
+        self.__name = name
+        self.__balance = balance
+    def deposit(self, amount):
+        # self.balance += amount
+        self.__balance += amount
+    def withdraw(self, amount):
+        # self.balance -= amount
+        self.__balance -= amount
+    def __str__(self):
+        # return "{0} , {1} , {2}".format(self.id, \
+        #     self.name, self.balance)
+        return "{0} , {1} , {2}".format(self.__id, \
+            self.__name, self.__balance)
+
+# 객체 정의
+account1 = BankAccount(100, "전우치", 15000)
+account1.deposit(5000)
+account1.withdraw(3000) # 17000
+#__로 숨기는 목적은 객체 정의 없이 직접 접근을 막기 위함
+account1.balance = 15000000
+print(account1)
+# __로 숨기더라도 _{클래스명}__{변수}로 조회 가능
+print(account1._BankAccount__balance)
+account1._BankAccount__balance = 100000
+print(account1)
+print()
