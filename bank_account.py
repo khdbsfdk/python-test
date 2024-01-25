@@ -10,3 +10,6 @@ class BankAccount:
     def __str__(self):
         return "{0} , {1} , {2}".format(self.__id, \
             self.__name, self.__balance)
+    
+accout1 = BankAccount(100, "kim", 15000)
+print(accout1)

@@ -19,5 +19,8 @@ print(dir(),"\n")
 # exe 파일을 생성하여 줄 수 있음, 그럼 dist 디렉토리 안에 exe 파일이 들어있음
 
 # 모듈을 복사하여 인스턴스를 만들어도 같은 모듈 원본을 바라본다.
-
+import DemoModule as m1
+import DemoModule as m2
+m1.x = 100 # 모듈 내 변수 수정
+m2.printX()
 
